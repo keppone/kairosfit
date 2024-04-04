@@ -7,4 +7,20 @@
     <h1>Kairos Fit<h1>
     <p>Votre temps, votre moment, votre fitness</p>
 </div>
+<div class="container">
+<h2>Nos partenaires</h2>
+<div class="row flex">
+    {% for partner in partners %}
+        <div class="col-3">
+            <div class="card">
+                <div class ="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ path('partner.show', {id: partner.id, slug: partner.slug}) }}">{{partner.name}}</a>
+                    </h5>
+                    <p class="card-text">{{ partner.commercialContact}} ({{partner.email}})</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

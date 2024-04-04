@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Twig\Environment;
+use App\Repository\PartnerRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Twig\Environment;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -18,9 +19,12 @@ class HomeController extends AbstractController
      * @throws {\Twig\Error\LoaderError}
      */
 
-    public function index(): Response
+    public function index(PartnerRepository $repository): Response
     {
-        return new Response($this->render('pages/home.html.twig'));
+        $partners = $repository->findLatest();
+        return new Response($this->render('pages/home.html.twig', [
+            'partners'=>$partners
+        ]));
     }
 }
 
