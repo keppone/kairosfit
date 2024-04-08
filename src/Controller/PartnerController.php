@@ -21,7 +21,7 @@ class PartnerController extends AbstractController
         $this->entityManager=$entityManager;
     }
 
-    #[Route('/partenaires', name: 'partner.index')]
+    #[Route('/partenaires', name: 'partner_index')]
     public function index(): Response
     {
         $this->entityManager->flush();
@@ -33,11 +33,11 @@ class PartnerController extends AbstractController
      * @return Response 
      */
 
-    #[Route('/partenaires/{slug}-{id}', name: 'partner.show', requirements:["slug"=>"[a-z0-9\-]*"])]
+    #[Route('/partenaires/{slug}-{id}', name: 'partner_show', requirements:["slug"=>"[a-z0-9\-]*"])]
     public function show(Partner $partner, string $slug): Response
     {
         if($partner->getSlug() !== $slug) {
-            return $this->redirectToRoute('partner.show', [
+            return $this->redirectToRoute('partner_show', [
                 'id' => $partner->getId(), 
                 'slug' => $partner->getSlug()
             ], status: 301);
