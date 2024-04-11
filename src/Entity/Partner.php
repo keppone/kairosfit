@@ -6,6 +6,7 @@ use App\Repository\PartnerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
@@ -16,15 +17,20 @@ class Partner
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Unique]
+    #[Assert\Length(min: 5)]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Assert\Length(min: 10, max:300)]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
     
     #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $activate = true;
 
+    #[Assert\Unique]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
