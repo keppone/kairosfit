@@ -5,7 +5,7 @@
 {% block body %}
 <div class="jumbotron text-center">
     <h1>Kairos Fit<h1>
-    <p>Votre temps, votre moment, votre fitness</p>
+    <p>Votre temps, Votre moment, Votre fitness</p>
 </div>
 <div class="container">
 <h2>Nos partenaires</h2>
@@ -15,7 +15,7 @@
             <div class="card">
                 <div class ="card-body">
                     <h5 class="card-title">
-                        <a href="{{ path('partner_show', {id: partner.id, slug: partner.slug}) }}">{{partner.name}}</a>
+                        <a href="{{ path('app_partner_show', {id: partner.id, slug: partner.slug}) }}">{{partner.name}}</a>
                     </h5>
                     <p class="card-text">{{ partner.commercialContact}} ({{partner.email}})</p>
                 </div>

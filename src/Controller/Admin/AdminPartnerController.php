@@ -24,14 +24,14 @@ class AdminPartnerController extends AbstractController
        $this-> entityManager= $entityManager;
     }
 
-    #[Route('/admin', name: 'admin_partner_index')]
+    #[Route('/admin', name: 'app_admin_partner_index')]
     public function index()
     {
        $partners = $this->repository->findAll();
        return $this->render('admin/partner/index.html.twig', compact('partners'));
     }
 
-    #[Route('/admin/partenaire/créer', name: 'admin_partner_new', methods:['GET', 'POST'])]
+    #[Route('/admin/partenaire/créer', name: 'app_admin_partner_new', methods:['GET', 'POST'])]
     public function new(Request $request) : Response
     {
       $partner = new Partner();
@@ -41,8 +41,8 @@ class AdminPartnerController extends AbstractController
       if ($form->isSubmitted() && $form->isValid()){
          $this->entityManager->persist($partner);
          $this->entityManager->flush();
-          $this->addFlash('success', 'Votre création a bien été réalisée');
-         return $this->redirectToRoute('admin_partner_index');
+         $this->addFlash('success', 'Votre création a bien été réalisée');
+         return $this->redirectToRoute('app_admin_partner_index');
       }
        return $this->render('admin/partner/new.html.twig', [
       'partner'=>$partner,
@@ -50,7 +50,7 @@ class AdminPartnerController extends AbstractController
    ]);
     }
 
-    #[Route('/admin/partenaire/{id}/modifier', name: 'admin_partner_edit', methods:['GET', 'POST'])]
+    #[Route('/admin/partenaire/{id}/modifier', name: 'app_admin_partner_edit', methods:['GET', 'POST'])]
     public function edit(Partner $partner, Request $request) : Response
     {
       $form= $this->createForm(PartnerType::class, $partner);
@@ -59,7 +59,7 @@ class AdminPartnerController extends AbstractController
       if ($form->isSubmitted() && $form->isValid()){
          $this->entityManager->flush();
          $this->addFlash('success', 'Votre modification a été prise en compte');
-         return $this->redirectToRoute('admin_partner_index');
+         return $this->redirectToRoute('app_admin_partner_index');
       }
 
       return $this->render('admin/partner/edit.html.twig', [
@@ -68,7 +68,7 @@ class AdminPartnerController extends AbstractController
    ]);
     }
 
-    #[Route('/admin/partenaires/{id}/supprimer', name: 'admin_partner_delete', methods: ['POST'])]
+    #[Route('/admin/partenaires/{id}/supprimer', name: 'app_admin_partner_delete', methods: ['POST'])]
     public function delete(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$partner->getId(), $request->getPayload()->get('_token'))) {
@@ -77,7 +77,7 @@ class AdminPartnerController extends AbstractController
             $this->addFlash('success', 'La suppression a été réalisée');
         }
 
-        return $this->redirectToRoute('admin_partner_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin_partner_index', [], Response::HTTP_SEE_OTHER);
     }
 }
 

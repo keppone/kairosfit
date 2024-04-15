@@ -25,7 +25,7 @@
         <tr>
             <td>{{partner.name}}</td>
             <td>
-                <a href="{{path('admin_partner_edit', {id: partner.id})}}" class= "btn btn-secondary">Modifier</a>
+                <a href="{{path('app_admin_partner_edit', {id: partner.id})}}" class= "btn btn-secondary">Modifier</a>
                 {{ include('admin/partner/_delete_form.html.twig') }}
             </td>
         </tr>
@@ -35,7 +35,7 @@
     </table>
 
     <div class="text-right">
-        <a href="{{path('admin_partner_new')}}" class="btn btn-primary"> Créer un partenaire</a>
+        <a href="{{path('app_admin_partner_new')}}" class="btn btn-primary"> Créer un partenaire</a>
 
 
     </div>
