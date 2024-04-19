@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos partenaires{% endblock %}
+
+{% block body %}
+    <h1>Nos partenaires</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ partner.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ partner.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ partner.description }}</td>
+            </tr>
+            <tr>
+                <th>Activation</th>
+                <td>{{ partner.activate ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ partner.email }}</td>
+            </tr>
+            <tr>
+                <th>Contact commercial</th>
+                <td>{{ partner.commercialContact }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_partner_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">Modifier</a>
+
+    {{ include('admin/partner/_delete_form.html.twig') }}
+{% endblock %}

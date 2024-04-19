@@ -18,19 +18,18 @@ class Partner
     private ?int $id = null;
 
     #[Assert\NotBlank]
-    #[Assert\Unique]
     #[Assert\Length(min: 5)]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[Assert\Length(min: 10, max:300)]
+    #[Assert\Length(min: 10, max:500)]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
     
     #[ORM\Column(type: Types::BOOLEAN)]
     private ?bool $activate = true;
 
-    #[Assert\Unique]
+    #[Assert\Email]
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
