@@ -1,0 +1,13 @@
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">
+            <a href="{{ path('app_partner_show', {slug: partner.slug, id: partner.id}) }}">
+                {{ partner.name }}
+            </a>
+        </h2>
+        <p class="card-text">{{ partner.description }} </p>
+        <div class="text-primary">
+            {{partner.email}}
+        </div>
+    </div>
+</div>

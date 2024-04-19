@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Partner;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Partner>
@@ -23,13 +24,12 @@ class PartnerRepository extends ServiceEntityRepository
 
 
     /**
-     * @return Partner[] Returns an array of Partner objects
+     * @return Query 
      */
-    public function findAllActivate(): array
+    public function findAllVisibleQuery(): Query
     {
         return $this->findVisibleQuery()
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
 
