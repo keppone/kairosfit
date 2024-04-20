@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+    <div class= "form-row">
+        <div class="col">
+            {{form_row(form.searchWord)}}
+        </div>
+        <div class="col">
+            {{ form_row(form.partnerActive)}}
+        </div>
+        <div class="col">
+            {{ form_row(form.partnerInactive)}}
+        </div>
+       <div class="col">
+            <button class="btn btn-primary">Rechercher</button>
+        </div> 
+    </div>
+{{ form_end(form) }}

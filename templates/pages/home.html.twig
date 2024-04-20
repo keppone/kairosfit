@@ -17,7 +17,7 @@
                     <h5 class="card-title">
                         <a href="{{ path('app_partner_show', {id: partner.id, slug: partner.slug}) }}">{{partner.name}}</a>
                     </h5>
-                    <p class="card-text">{{ partner.commercialContact}} ({{partner.email}})</p>
+                    <p class="card-text">{{ partner.commercialContact}} {{partner.activate}} ({{partner.email}})</p>
                 </div>
             </div>
         </div>

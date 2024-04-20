@@ -12,6 +12,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
 class Partner
 {
+    const ACTIVATE =[
+        0 => 'Inactif',
+        1 => 'Actif'
+    ];
+
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -75,11 +81,17 @@ class Partner
         return $this->activate;
     }
 
+
     public function setActivate(bool $activate): static
     {
         $this->activate = $activate;
 
         return $this;
+    }
+
+      public function getActivateText(): ?string 
+    {
+        return self::ACTIVATE[$this->activate]; 
     }
 
     public function getEmail(): ?string

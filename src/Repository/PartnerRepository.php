@@ -3,9 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Partner;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use App\Entity\PartnerSearchData;
+use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Partner>
@@ -26,10 +27,26 @@ class PartnerRepository extends ServiceEntityRepository
     /**
      * @return Query 
      */
-    public function findAllVisibleQuery(): Query
+    public function findAllVisibleQuery(PartnerSearchData $search): Query
     {
-        return $this->findVisibleQuery()
-            ->getQuery();
+        $query= $this->findVisibleQuery();
+
+        if (!empty($search->getSearchWord())){
+            $query = $query
+                ->andWhere('p.name LIKE :searchWord')
+                ->setParameter('searchWord', "%{$search->getSearchWord()}%");
+        }
+
+        if (!empty($search->getPartnerActive())){
+            $query = $query
+                ->andWhere('p.activate = 1');
+        }
+
+        if (!empty($search->getPartnerInactive())){
+            $query = $query
+                ->andWhere('p.activate = 0');
+        }
+        return $query->getQuery();
     }
 
 
@@ -47,7 +64,7 @@ class PartnerRepository extends ServiceEntityRepository
     private function findVisibleQuery()
     {
         return $this->createQueryBuilder('p')
-            ->where('p.activate = true');
+            ->where('p.id != 0');
     }
 
     //    /**
