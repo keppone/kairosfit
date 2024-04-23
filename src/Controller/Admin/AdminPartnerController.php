@@ -2,14 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Room;
 use App\Entity\Partner;
 use App\Form\PartnerType;
 use App\Repository\PartnerRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 class AdminPartnerController extends AbstractController
@@ -42,14 +43,6 @@ class AdminPartnerController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_partner_show', methods: ['GET'])]
-    public function show(Partner $partner): Response
-    {
-        return $this->render('admin/partner/show.html.twig', [
-            'partner' => $partner,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_admin_partner_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Partner $partner, EntityManagerInterface $entityManager): Response
     {
@@ -65,6 +58,14 @@ class AdminPartnerController extends AbstractController
         return $this->render('admin/partner/edit.html.twig', [
             'partner' => $partner,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_admin_partner_show', methods: ['GET'])]
+    public function show(Partner $room): Response
+    {
+        return $this->render('admin/partner/show.html.twig', [
+            'partner' => $partner,
         ]);
     }
 

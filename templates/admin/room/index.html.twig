@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les salles de Sport{% endblock %}
+
+{% block body %}
+    <h1>Les Salles de Sports</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ville</th>
+                <th>Code Postale</th>
+                <th>Adresse</th>
+                <th>Active</th>
+                <th>Gestion des mails</th>
+                <th>Gestion des planning</th>
+                <th>Promotion de la salle</th>
+                <th>Autorisation de ventes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.city }}</td>
+                <td>{{ room.postcode }}</td>
+                <td>{{ room.address }}</td>
+                <td>{{ room.activate ? 'Yes' : 'No' }}</td>
+                <td>{{ room.mailing ? 'Yes' : 'No' }}</td>
+                <td>{{ room.planning ? 'Yes' : 'No' }}</td>
+                <td>{{ room.promote ? 'Yes' : 'No' }}</td>
+                <td>{{ room.sale ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_room_edit', {'id': room.id}) }}" class="btn btn-warning">Modifier</a>
+                    {{ include('admin/room/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Aucune salle trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_room_new') }}"class="btn btn-success">Créer une nouvelle salle</a>
+{% endblock %}

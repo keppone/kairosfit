@@ -8,27 +8,19 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
-                <th>Description</th>
                 <th>Activation</th>
-                <th>Email</th>
-                <th>Contact commercial</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for partner in partners %}
             <tr>
-                <td>{{ partner.id }}</td>
                 <td>{{ partner.name }}</td>
-                <td>{{ partner.description }}</td>
                 <td>{{ partner.activate ? 'Yes' : 'No' }}</td>
-                <td>{{ partner.email }}</td>
-                <td>{{ partner.commercialContact }}</td>
                 <td>
-                    <a href="{{ path('app_admin_partner_show', {'id': partner.id}) }}">Sélectionner</a>
-                    <a href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}">Modifier</a>
+                    <a href="{{ path('app_admin_partner_edit', {'id': partner.id}) }}" class="btn btn-warning">Modifier</a>
+                    {{ include('admin/partner/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -39,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_partner_new') }}">Créer un nouveau partenaire</a>
+    <a href="{{ path('app_admin_partner_new') }}" class="btn btn-primary">Créer un nouveau partenaire</a>
 {% endblock %}

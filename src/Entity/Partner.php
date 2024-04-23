@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PartnerRepository;
+use App\Entity\Room;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Cocur\Slugify\Slugify;
+use App\Repository\PartnerRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -17,7 +20,6 @@ class Partner
         1 => 'Actif'
     ];
 
-    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -41,6 +43,18 @@ class Partner
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $commercial_contact = null;
+
+    /**
+     * @var Collection<int, Room>
+     */
+    #[ORM\OneToMany(mappedBy: 'partners', targetEntity: Room::class)]
+    private Collection $rooms;
+
+    public function __construct()
+    {
+        $this->rooms = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -117,4 +131,35 @@ class Partner
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Room>
+     */
+    public function getRooms(): Collection
+    {
+        return $this->rooms;
+    }
+
+    public function addRoom(Room $room): static
+    {
+        if (!$this->rooms->contains($room)) {
+            $this->rooms->add($room);
+            $room->setPartners($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRoom(Room $room): static
+    {
+        if ($this->rooms->removeElement($room)) {
+            // set the owning side to null (unless already changed)
+            if ($room->getPartners() === $this) {
+                $room->setPartners(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

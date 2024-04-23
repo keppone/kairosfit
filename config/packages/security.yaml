@@ -34,12 +34,17 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/home, roles: ROLE_USER }
-        - { path: ^/login, roles: PUBLIC_ACCESS }
+        # matches /admin/* except for anything matching the above rule
+        - { path: '^/admin', roles: ROLE_ADMIN }
+        # matches /home except for anything matching the above rule
+        - { path: '^/', roles: ROLE_USER }
+        # matches /login except for anything matching the above rule
+        - { path: '^login', roles: ROLE_PUBLIC }
+        
+
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN: ROLE_USER
         
 when@test:
     security:

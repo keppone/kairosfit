@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Salle de Sport{% endblock %}
+
+{% block body %}
+    <h1>Nouvelle Salle de Sport</h1>
+<div class=".container-fluid">
+    
+    <div class="row">
+        <div class="col-6 col-sm-4">
+            <div class="col">
+                {{ include('admin/room/_form.html.twig') }}
+            </div>
+            <div class="col-6 .col-sm-4">
+                <a href="{{ path('app_admin_room_index') }}" class="btn btn-dark">Retour à la liste</a>
+            </div> 
+        </div> 
+    </div>
+</div>
+    
+{% endblock %}
